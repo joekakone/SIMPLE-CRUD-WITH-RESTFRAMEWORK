@@ -28,3 +28,27 @@ Voici une procédure pour créer une API avec 	Django Rest Framework
 
 ## 5. Lancer le projet
 `$ python manage.py runserver`
+
+
+
+
+# DRF
+```python
+from polls.serializers import PollSerializer
+from polls.models import Poll
+
+# create
+poll_serializer = PollSerializer(data={"question": "Mojito or Caipirinha?", "created_by": 1})
+print(poll_serializer.is_valid())
+
+poll = poll_serializer.save()
+print(poll.pk)
+
+# update
+poll_serializer = PollSerializer(instance=poll, data={"question": "Mojito, Caipirinha or margarita?", "created_by": 1})
+print(poll_serializer.is_valid())
+
+poll_serializer.save()
+print(Poll.objects.get(pk=5).question)
+```
+
